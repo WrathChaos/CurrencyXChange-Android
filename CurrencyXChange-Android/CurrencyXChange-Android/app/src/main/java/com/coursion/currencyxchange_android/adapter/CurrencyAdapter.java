@@ -5,15 +5,19 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
 import com.coursion.currencyxchange_android.R;
 import com.coursion.currencyxchange_android.controller.SelectedCurrencyActivity;
 import com.coursion.currencyxchange_android.model.Currency;
+import com.coursion.currencyxchange_android.pref.PrefManager;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -21,7 +25,7 @@ import java.util.Random;
  * Created by Kuray(FreakyCoder) on 22/09/2017.
  */
 
-public class CurrencyAdapter  extends RecyclerView.Adapter<CurrencyAdapter.CurrencyHolder>{
+public class CurrencyAdapter extends RecyclerView.Adapter<CurrencyAdapter.CurrencyHolder> {
 
     private ArrayList<Currency> list;
     private LayoutInflater inflater;
@@ -34,6 +38,7 @@ public class CurrencyAdapter  extends RecyclerView.Adapter<CurrencyAdapter.Curre
         this.activity = activity;
         inflater = LayoutInflater.from(context);
     }
+
     @Override
     public CurrencyHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View root = inflater.inflate(R.layout.currency_template, viewGroup, false);
@@ -66,25 +71,27 @@ public class CurrencyAdapter  extends RecyclerView.Adapter<CurrencyAdapter.Curre
         ImageView currency_image;
         TextView currency_name;
         TextView currency_value;
+
         CurrencyHolder(View itemView) {
             super(itemView);
-            currency_container = (RelativeLayout) itemView.findViewById(R.id.currency_container);
-            currency_image = (ImageView) itemView.findViewById(R.id.currency_image);
-            currency_name = (TextView) itemView.findViewById(R.id.currency_name);
-            currency_value = (TextView) itemView.findViewById(R.id.currency_value);
+            currency_container = itemView.findViewById(R.id.currency_container);
+            currency_image = itemView.findViewById(R.id.currency_image);
+            currency_name = itemView.findViewById(R.id.currency_name);
+            currency_value = itemView.findViewById(R.id.currency_value);
             currency_container.setOnClickListener(this);
         }
+
         @Override
         public void onClick(View view) {
-            activity.startActivity(new Intent(activity, SelectedCurrencyActivity.class));
-           /* for (int i = 0; i < list.size(); i++) {
-                if (String.valueOf(list.get(i).getId()).equalsIgnoreCase(incident_id.getText().toString())) {
-                    Log.d("MyApp", "List id : " + list.get(i).getId() + "\nIncident Id : " + incident_id.getText());
-                    prefManagerIncident.saveIncident("clicked_incident", list.get(i));
-                    prefUtil.saveTappedMarker(list.get(i).getSectionId(), list.get(i).getLatitude(), list.get(i).getLongitude(), "incident");
+            for (Currency currency : list){
+                if (currency.getFull_name().equalsIgnoreCase(currency_name.getText().toString())){
+                    Log.d("MyApp", "Selected Currency Name : " + currency.getFull_name());
+                    // Saved selected currency
+                    PrefManager prefManager = new PrefManager(activity);
+                    prefManager.saveSelectedCurrency(currency);
+                    activity.startActivity(new Intent(activity, SelectedCurrencyActivity.class));
                 }
             }
-            activity.startActivity(new Intent(activity, SelectedCurrencyActivity.class));*/
         }
     }
 }
