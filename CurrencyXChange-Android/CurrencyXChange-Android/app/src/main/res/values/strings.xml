@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">CurrencyXChange-Android</string>
+
+    <!-- Internet Connection -->
+    <string name="no_internet">No Internet Connection</string>
+    <string name="no_internet_desc">Please try again after establishing an internet connection.</string>
+    <string name="try_again">Try Again</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- Currency Strings -->
+    <string name="currency">Currency</string>
+
+    <!-- Gold Strings -->
+    <string name="gold">Gold</string>
+
+    <string name="title_activity_selected_currency">SelectedCurrencyActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+
+
+</resources>

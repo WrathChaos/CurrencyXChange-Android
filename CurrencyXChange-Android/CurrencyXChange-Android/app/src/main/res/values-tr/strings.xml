@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">CurrencyXChange-Android</string>
+
+    <!-- Internet Connection -->
+    <string name="no_internet">Internet Bağlantı Hatası</string>
+    <string name="please_try_again">Lütfen bir internet bağlantısı kurduktan sonra tekrar deneyin.</string>
+    <string name="try_again">Daha Sonra Tekrar Deneyin</string>
+
+    <!-- Currency Strings -->
+    <string name="currency">Döviz</string>
+
+    <!-- Gold Strings -->
+    <string name="gold">Altın</string>
+
+</resources>
