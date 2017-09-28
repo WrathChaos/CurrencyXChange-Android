@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">CurrencyXChange-Android</string>
+    <string name="app_name">CurrencyXChange</string>
 
     <!-- Internet Connection -->
     <string name="no_internet">No Internet Connection</string>
@@ -15,8 +15,4 @@
     <string name="gold">Gold</string>
 
     <string name="title_activity_selected_currency">SelectedCurrencyActivity</string>
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
-
-
 </resources>

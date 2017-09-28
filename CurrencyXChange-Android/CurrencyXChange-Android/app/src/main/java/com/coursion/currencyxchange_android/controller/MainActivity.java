@@ -14,6 +14,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+
 import com.coursion.currencyxchange_android.R;
 import com.coursion.currencyxchange_android.adapter.CurrencyAdapter;
 import com.coursion.currencyxchange_android.adapter.GoldAdapter;
@@ -23,6 +25,7 @@ import com.coursion.currencyxchange_android.event.CurrencyEvent;
 import com.coursion.currencyxchange_android.event.GoldEvent;
 import com.coursion.currencyxchange_android.model.Currency;
 import com.coursion.currencyxchange_android.model.Gold;
+import com.coursion.currencyxchange_android.pref.PrefManager;
 import com.coursion.currencyxchange_android.util.NetworkCheck;
 import org.greenrobot.eventbus.EventBus;
 import java.util.ArrayList;
@@ -37,13 +40,17 @@ public class MainActivity extends AppCompatActivity {
 
     SectionsPagerAdapter mSectionsPagerAdapter;
     ViewPager mViewPager;
+    // Preferences
+    PrefManager prefManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        // Color Array Initialization
+        colorArrayInit();
+        // Toolbar Initialization
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
     }
@@ -52,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
     public void onContentChanged() {
         super.onContentChanged();
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+        prefManager = new PrefManager(MainActivity.this);
 
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
@@ -60,6 +68,28 @@ public class MainActivity extends AppCompatActivity {
         // This is IMPORTANT for TABS
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
+    }
+
+    private void colorArrayInit(){
+        try {
+            ArrayList<String> colorArray = prefManager.getColorArray("currency_color");
+            ArrayList<String> goldColorArray = prefManager.getColorArray("gold_color");
+            if (colorArray.size() <= 0){
+                // Generating and saving color array for currency first 10 data
+                prefManager.saveColorArray("currency_color");
+            }
+            if (goldColorArray.size() <= 0){
+                // Generating and saving color array for currency first 10 data
+                prefManager.saveColorArray("gold_color");
+            }
+        } catch (Exception e) {
+            Log.d("MyApp", "colorArrayInit: Exception : " + e.toString());
+            e.printStackTrace();
+            // Generating and saving color array for currency first 10 data
+            prefManager.saveColorArray("currency_color");
+            // Generating and saving color array for currency first 10 data
+            prefManager.saveColorArray("gold_color");
+        }
     }
 
 

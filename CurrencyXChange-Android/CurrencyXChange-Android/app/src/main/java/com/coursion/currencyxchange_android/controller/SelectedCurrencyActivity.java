@@ -14,19 +14,14 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
-import com.bumptech.glide.Glide;
 import com.coursion.currencyxchange_android.R;
 import com.coursion.currencyxchange_android.model.Currency;
 import com.coursion.currencyxchange_android.pref.PrefManager;
 import com.tapadoo.alerter.Alerter;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import jp.wasabeef.glide.transformations.BlurTransformation;
 import ru.dimorinny.floatingtextbutton.FloatingTextButton;
 
-import static com.bumptech.glide.request.RequestOptions.bitmapTransform;
 
 public class SelectedCurrencyActivity extends AppCompatActivity {
     // Outlets
@@ -48,8 +43,6 @@ public class SelectedCurrencyActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selected_currency);
         ButterKnife.bind(this);
-        // Blurry background function
-        blurryBackground();
         // Setup
         setup();
         // Keyboard Auto Pop up
@@ -169,11 +162,5 @@ public class SelectedCurrencyActivity extends AppCompatActivity {
 
     private String calculateFromTL(Double userValue){
         return String.format("%.4f", (userValue / currency.getBuying()));
-    }
-
-    private void blurryBackground(){
-        Glide.with(this).load(R.drawable.bg3)
-                .apply(bitmapTransform(new BlurTransformation(25)))
-                .into(bg);
     }
 }

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">CurrencyXChange-Android</string>
+    <string name="app_name">CurrencyXChange</string>
 
     <!-- Internet Connection -->
     <string name="no_internet">Internet Bağlantı Hatası</string>
@@ -11,5 +11,6 @@
 
     <!-- Gold Strings -->
     <string name="gold">Altın</string>
+    <string name="title_activity_selected_currency">SelectedCurrencyActivity</string>
 
 </resources>

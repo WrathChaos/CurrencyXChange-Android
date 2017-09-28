@@ -52,15 +52,11 @@ dependencies {
     // Alerter Library
     compile 'com.tapadoo.android:alerter:2.0.0'
     // Custom Activity on Crush
-//    compile 'cat.ereza:customactivityoncrash:2.1.0'
+    compile 'cat.ereza:customactivityoncrash:2.1.0'
     // RecyclerView Animator Library
     compile 'jp.wasabeef:recyclerview-animators:2.2.7'
-    // Blur Effect Library
-    compile 'jp.wasabeef:glide-transformations:3.0.1'
     // Custom Font Library
     compile 'uk.co.chrisjenx:calligraphy:2.3.0'
-
-
 
     testCompile 'junit:junit:4.12'
 }

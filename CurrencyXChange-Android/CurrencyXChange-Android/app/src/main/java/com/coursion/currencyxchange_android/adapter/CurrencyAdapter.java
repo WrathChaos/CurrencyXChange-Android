@@ -31,12 +31,17 @@ public class CurrencyAdapter extends RecyclerView.Adapter<CurrencyAdapter.Curren
     private LayoutInflater inflater;
     private Activity activity;
     private Context context;
+    // Preferences
+    private PrefManager prefManager;
+    private ArrayList<String> colorArray;
 
     public CurrencyAdapter(Activity activity, Context context, ArrayList<Currency> list) {
         this.context = context;
         this.list = list;
         this.activity = activity;
         inflater = LayoutInflater.from(context);
+        prefManager = new PrefManager(activity);
+        colorArray = prefManager.getColorArray("currency_color");
     }
 
     @Override
@@ -44,10 +49,6 @@ public class CurrencyAdapter extends RecyclerView.Adapter<CurrencyAdapter.Curren
         View root = inflater.inflate(R.layout.currency_template, viewGroup, false);
         CurrencyHolder holder = new CurrencyHolder(root);
         final Currency current = list.get(i);
-        Random rnd = new Random();
-        int color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
-        holder.currency_container.setBackgroundColor(color);
-//        holder.currency_image.setBackground();
         holder.currency_name.setText(current.getFull_name());
         holder.currency_value.setText(String.format("%.4f", current.getBuying()));
         return holder;
@@ -56,7 +57,13 @@ public class CurrencyAdapter extends RecyclerView.Adapter<CurrencyAdapter.Curren
     @Override
     public void onBindViewHolder(final CurrencyHolder holder, final int position) {
         final Currency current = list.get(position);
-//        holder.currency_image.setBackground();
+        if (position >= colorArray.size()) {
+            Random rnd = new Random();
+            int color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
+            holder.currency_container.setBackgroundColor(color);
+        } else {
+            holder.currency_container.setBackgroundColor(Color.parseColor(colorArray.get(position)));
+        }
         holder.currency_name.setText(current.getFull_name());
         holder.currency_value.setText(String.format("%.4f", current.getBuying()));
     }

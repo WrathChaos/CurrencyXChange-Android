@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.coursion.currencyxchange_android.R;
 import com.coursion.currencyxchange_android.model.Gold;
+import com.coursion.currencyxchange_android.pref.PrefManager;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -27,22 +28,23 @@ public class GoldAdapter extends RecyclerView.Adapter<GoldAdapter.GoldHolder>{
     private LayoutInflater inflater;
     private Activity activity;
     private Context context;
+    // Preferences
+    private PrefManager prefManager;
+    private ArrayList<String> colorArray;
 
     public GoldAdapter(Activity activity, Context context, ArrayList<Gold> list) {
         this.context = context;
         this.list = list;
         this.activity = activity;
         inflater = LayoutInflater.from(context);
+        prefManager = new PrefManager(activity);
+        colorArray = prefManager.getColorArray("gold_color");
     }
     @Override
     public GoldAdapter.GoldHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View root = inflater.inflate(R.layout.currency_template, viewGroup, false);
         GoldHolder holder = new GoldHolder(root);
         final Gold current = list.get(i);
-        Random rnd = new Random();
-        int color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
-        holder.currency_container.setBackgroundColor(color);
-//        holder.currency_image.setBackground();
         holder.currency_name.setText(current.getFull_name());
         holder.currency_value.setText(String.format("%.4f", current.getBuying()));
         return holder;
@@ -51,7 +53,13 @@ public class GoldAdapter extends RecyclerView.Adapter<GoldAdapter.GoldHolder>{
     @Override
     public void onBindViewHolder(final GoldHolder holder, final int position) {
         final Gold current = list.get(position);
-//        holder.currency_image.setBackground();
+        if (position >= colorArray.size()) {
+            Random rnd = new Random();
+            int color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
+            holder.currency_container.setBackgroundColor(color);
+        } else {
+            holder.currency_container.setBackgroundColor(Color.parseColor(colorArray.get(position)));
+        }
         holder.currency_name.setText(current.getFull_name());
         holder.currency_value.setText(String.format("%.4f", current.getBuying()));
     }
