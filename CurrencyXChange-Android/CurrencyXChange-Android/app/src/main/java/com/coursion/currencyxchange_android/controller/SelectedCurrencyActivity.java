@@ -1,5 +1,6 @@
 package com.coursion.currencyxchange_android.controller;
 
+import android.app.Activity;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
@@ -8,6 +9,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -21,6 +23,8 @@ import com.tapadoo.alerter.Alerter;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ru.dimorinny.floatingtextbutton.FloatingTextButton;
+
+import static java.security.AccessController.getContext;
 
 
 public class SelectedCurrencyActivity extends AppCompatActivity {
@@ -62,7 +66,7 @@ public class SelectedCurrencyActivity extends AppCompatActivity {
         title_right_side.setText(currency.getCode() + " ➙ TL");
         currency_title_left.setText(currency.getCode());
         currency_title_right.setText("TL");
-        right_currency_et.setText(String.valueOf(currency.getBuying()));
+        right_currency_et.setText(String.format("%.4f", currency.getBuying()));
         copyBtn.setTitle("Copy TL");
         left_currency_et.addTextChangedListener(textWatcher);
         right_currency_et.addTextChangedListener(textWatcher);

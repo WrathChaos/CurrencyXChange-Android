@@ -1,16 +1,18 @@
 <resources>
     <string name="app_name">CurrencyXChange</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_selected_currency">SelectedCurrencyActivity</string>
 
     <!-- Internet Connection -->
     <string name="no_internet">Internet Bağlantı Hatası</string>
-    <string name="please_try_again">Lütfen bir internet bağlantısı kurduktan sonra tekrar deneyin.</string>
+    <string name="no_internet_desc">Lütfen bir internet bağlantısı kurduktan sonra tekrar deneyin.</string>
     <string name="try_again">Daha Sonra Tekrar Deneyin</string>
 
+    <string name="action_settings">Ayarlar</string>
     <!-- Currency Strings -->
     <string name="currency">Döviz</string>
 
     <!-- Gold Strings -->
     <string name="gold">Altın</string>
-    <string name="title_activity_selected_currency">SelectedCurrencyActivity</string>
 
 </resources>

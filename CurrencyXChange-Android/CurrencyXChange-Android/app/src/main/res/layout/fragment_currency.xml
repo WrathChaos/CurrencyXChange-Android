@@ -3,6 +3,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.coursion.currencyxchange_android.controller.MainActivity$PlaceholderFragment">
+
+    <include android:id="@+id/loading_view_currency"
+        android:visibility="gone"
+        layout="@layout/loading_view" />
+
+    <include android:id="@+id/nc_view_currency"
+        android:visibility="gone"
+        layout="@layout/no_connection_view" />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerViewCurrency"
         android:layout_width="match_parent"

@@ -1,5 +1,6 @@
 package com.coursion.currencyxchange_android.controller;
 
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -52,7 +53,6 @@ public class MainActivity extends AppCompatActivity {
         // Toolbar Initialization
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
     }
 
     @Override
@@ -62,11 +62,11 @@ public class MainActivity extends AppCompatActivity {
         prefManager = new PrefManager(MainActivity.this);
 
         // Set up the ViewPager with the sections adapter.
-        mViewPager = (ViewPager) findViewById(R.id.container);
+        mViewPager = findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
         // This is IMPORTANT for TABS
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+        TabLayout tabLayout = findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
     }
 
@@ -92,17 +92,20 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
     public static class PlaceholderFragment extends Fragment {
         // Fragment based variables
         private static final String ARG_SECTION_NUMBER = "section_number";
         // Currency Outlets
         @BindView(R.id.recyclerViewCurrency) RecyclerView recyclerViewCurrency;
+        @BindView(R.id.loading_view_currency) View lv_currency;
+        @BindView(R.id.nc_view_currency) View nc_view_currency;
         // Currency Variables
         ArrayList<Currency> currencies;
         CurrencyAdapter currencyAdapter;
         // Gold Outlets
         RecyclerView recyclerViewGold;
+        View lv_gold;
+        View nc_view_gold;
         // Gold Variables
         ArrayList<Gold> goldies;
         GoldAdapter goldAdapter;
@@ -129,22 +132,71 @@ public class MainActivity extends AppCompatActivity {
             View rootView2 = inflater.inflate(R.layout.fragment_gold, container, false);
             ButterKnife.bind(this, rootView);
             recyclerViewGold = rootView2.findViewById(R.id.recyclerViewGold);
-
+            lv_gold = rootView2.findViewById(R.id.loading_view_gold);
+            nc_view_gold = rootView2.findViewById(R.id.nc_view_gold);
 
             switch (getArguments().getInt(ARG_SECTION_NUMBER)){
                 case 1:
-                    Log.d("MyApp", "onCreateView case 0 ");
-                    // Get all currency data from API
-                    getCurrencyData();
+                    if (!networkCheck()) {
+                        new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
+                                .setTitleText(getString(R.string.no_internet))
+                                .setContentText(getString(R.string.try_again))
+                                .setConfirmText(getString(R.string.try_again))
+                                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                    @Override
+                                    public void onClick(SweetAlertDialog sDialog) {
+                                        sDialog.dismissWithAnimation();
+                                        getActivity().recreate();
+                                        getActivity().finish();
+                                    }
+                                })
+                                .show();
+                    } else {
+                        try {
+                            lv_currency.setVisibility(View.VISIBLE);
+                            nc_view_currency.setVisibility(View.GONE);
+                            // Get all currency data from API
+                            getCurrencyData();
+                        } catch (Exception e) {
+                            lv_currency.setVisibility(View.GONE);
+                            Log.e("MyApp", "getCurrencyData Error : " + e.toString());
+                            e.printStackTrace();
+                            nc_view_currency.setVisibility(View.VISIBLE);
+                        }
+                    }
                     return rootView;
                 case 2:
-                    // Get all gold data from API
-                    getGoldData();
+                    if(!networkCheck()){
+                        new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
+                                .setTitleText(getString(R.string.no_internet))
+                                .setContentText(getString(R.string.try_again))
+                                .setConfirmText(getString(R.string.try_again))
+                                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                    @Override
+                                    public void onClick(SweetAlertDialog sDialog) {
+                                        sDialog.dismissWithAnimation();
+                                        getActivity().recreate();
+                                        getActivity().finish();
+                                    }
+                                })
+                                .show();
+                    } else {
+                        try {
+                            lv_gold.setVisibility(View.VISIBLE);
+                            nc_view_gold.setVisibility(View.GONE);
+                            // Get all gold data from API
+                            getGoldData();
+                        } catch (Exception e) {
+                            lv_gold.setVisibility(View.GONE);
+                            Log.e("MyApp", "getGoldData Error : " + e.toString());
+                            e.printStackTrace();
+                            nc_view_gold.setVisibility(View.VISIBLE);
+                        }
+                    }
                     return rootView2;
             }
             return rootView;
         }
-
 
         @Override
         public void onResume() {
@@ -152,14 +204,13 @@ public class MainActivity extends AppCompatActivity {
             if (!networkCheck()) {
                 new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
                         .setTitleText(getString(R.string.no_internet))
-                        .setContentText(getString(R.string.please_try_again))
+                        .setContentText(getString(R.string.try_again))
                         .setConfirmText(getString(R.string.try_again))
                         .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                             @Override
                             public void onClick(SweetAlertDialog sDialog) {
                                 sDialog.dismissWithAnimation();
                                 getActivity().recreate();
-                                getActivity().finish();
                             }
                         })
                         .show();
@@ -178,6 +229,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Subscribe
         public void listenCurrencyEvent(CurrencyEvent currencyEvent){
+            lv_currency.setVisibility(View.GONE);
             currencies = new ArrayList<>(currencyEvent.getCurrencyList());
             Log.d("MyApp", "listenCurrencyEvent Currency List size : " + currencies.size());
             recyclerViewCurrency.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -190,6 +242,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Subscribe
         public void listenGoldEvent(GoldEvent goldEvent){
+            lv_gold.setVisibility(View.GONE);
             goldies = new ArrayList<>(goldEvent.getGoldList());
             Log.d("MyApp", "listenGoldEvent Gold List Size : " + goldies.size());
             recyclerViewGold.setLayoutManager(new LinearLayoutManager(getContext()));
