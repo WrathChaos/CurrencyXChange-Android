@@ -68,6 +68,7 @@ public class SelectedCurrencyActivity extends AppCompatActivity {
         currency_title_right.setText("TL");
         right_currency_et.setText(String.format("%.4f", currency.getBuying()));
         copyBtn.setTitle("Copy TL");
+        left_currency_et.setSelection(left_currency_et.getText().length());
         left_currency_et.addTextChangedListener(textWatcher);
         right_currency_et.addTextChangedListener(textWatcher);
     }
