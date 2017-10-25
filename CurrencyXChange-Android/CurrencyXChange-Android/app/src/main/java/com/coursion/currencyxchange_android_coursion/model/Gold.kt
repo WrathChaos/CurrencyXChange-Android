@@ -1,4 +1,4 @@
-package com.coursion.currencyxchange_android.model
+package com.coursion.currencyxchange_android_coursion.model
 
 /**
  * Created by Kuray(FreakyCoder) on 22/09/2017.

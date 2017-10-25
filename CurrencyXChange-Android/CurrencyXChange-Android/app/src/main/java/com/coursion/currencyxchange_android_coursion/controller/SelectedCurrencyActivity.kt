@@ -1,4 +1,4 @@
-package com.coursion.currencyxchange_android.controller
+package com.coursion.currencyxchange_android_coursion.controller
 
 import android.content.ClipData
 import android.content.ClipboardManager
@@ -9,9 +9,9 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.inputmethod.InputMethodManager
-import com.coursion.currencyxchange_android.R
-import com.coursion.currencyxchange_android.model.Currency
-import com.coursion.currencyxchange_android.pref.PrefManager
+import com.coursion.currencyxchange_android_coursion.R
+import com.coursion.currencyxchange_android_coursion.model.Currency
+import com.coursion.currencyxchange_android_coursion.pref.PrefManager
 import com.tapadoo.alerter.Alerter
 import kotlinx.android.synthetic.main.activity_selected_currency.*
 

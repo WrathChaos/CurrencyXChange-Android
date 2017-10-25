@@ -1,4 +1,4 @@
-package com.coursion.currencyxchange_android.util
+package com.coursion.currencyxchange_android_coursion.util
 
 import android.content.Context
 import android.net.ConnectivityManager

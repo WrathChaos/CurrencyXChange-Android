@@ -1,13 +1,13 @@
-package com.coursion.currencyxchange_android.background
+package com.coursion.currencyxchange_android_coursion.background
 
 import android.util.Log
 
-import com.coursion.currencyxchange_android.api.ApiClient
-import com.coursion.currencyxchange_android.api.ApiInterface
-import com.coursion.currencyxchange_android.event.CurrencyEvent
-import com.coursion.currencyxchange_android.event.GoldEvent
-import com.coursion.currencyxchange_android.model.Currency
-import com.coursion.currencyxchange_android.model.Gold
+import com.coursion.currencyxchange_android_coursion.api.ApiClient
+import com.coursion.currencyxchange_android_coursion.api.ApiInterface
+import com.coursion.currencyxchange_android_coursion.event.CurrencyEvent
+import com.coursion.currencyxchange_android_coursion.event.GoldEvent
+import com.coursion.currencyxchange_android_coursion.model.Currency
+import com.coursion.currencyxchange_android_coursion.model.Gold
 
 import org.greenrobot.eventbus.EventBus
 

@@ -1,11 +1,9 @@
-package com.coursion.currencyxchange_android.adapter
+package com.coursion.currencyxchange_android_coursion.adapter
 
 import android.app.Activity
 import android.content.Context
-import android.content.Intent
 import android.graphics.Color
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,19 +11,18 @@ import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
 
-import com.coursion.currencyxchange_android.R
-import com.coursion.currencyxchange_android.controller.SelectedCurrencyActivity
-import com.coursion.currencyxchange_android.model.Currency
-import com.coursion.currencyxchange_android.pref.PrefManager
+import com.coursion.currencyxchange_android_coursion.R
+import com.coursion.currencyxchange_android_coursion.model.Gold
+import com.coursion.currencyxchange_android_coursion.pref.PrefManager
 
 import java.util.ArrayList
 import java.util.Random
 
 /**
- * Created by Kuray(FreakyCoder) on 22/09/2017.
+ * Created by Boom on 9/24/2017.
  */
 
-class CurrencyAdapter(private val activity: Activity, private val context: Context, private val list: ArrayList<Currency>) : RecyclerView.Adapter<CurrencyAdapter.CurrencyHolder>() {
+class GoldAdapter(private val activity: Activity, private val context: Context, private val list: ArrayList<Gold>) : RecyclerView.Adapter<GoldAdapter.GoldHolder>() {
     private val inflater: LayoutInflater
     // Preferences
     private val prefManager: PrefManager
@@ -34,19 +31,19 @@ class CurrencyAdapter(private val activity: Activity, private val context: Conte
     init {
         inflater = LayoutInflater.from(context)
         prefManager = PrefManager(activity)
-        colorArray = prefManager.getColorArray("currency_color")
+        colorArray = prefManager.getColorArray("gold_color")
     }
 
-    override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): CurrencyHolder {
+    override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): GoldAdapter.GoldHolder {
         val root = inflater.inflate(R.layout.currency_template, viewGroup, false)
-        val holder = CurrencyHolder(root)
+        val holder = GoldHolder(root)
         val current = list[i]
         holder.currency_name.text = current.full_name
         holder.currency_value.setText(String.format("%.4f", current.buying))
         return holder
     }
 
-    override fun onBindViewHolder(holder: CurrencyHolder, position: Int) {
+    override fun onBindViewHolder(holder: GoldHolder, position: Int) {
         val current = list[position]
         if (position >= colorArray!!.size) {
             val rnd = Random()
@@ -63,30 +60,29 @@ class CurrencyAdapter(private val activity: Activity, private val context: Conte
         return list.size
     }
 
-    inner class CurrencyHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
+    inner class GoldHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
         var currency_container: RelativeLayout
         var currency_image: ImageView
         var currency_name: TextView
         var currency_value: TextView
 
         init {
-            currency_container = itemView.findViewById(R.id.currency_container)
-            currency_image = itemView.findViewById(R.id.currency_image)
-            currency_name = itemView.findViewById(R.id.currency_name)
-            currency_value = itemView.findViewById(R.id.currency_value)
+            currency_container = itemView.findViewById<View>(R.id.currency_container) as RelativeLayout
+            currency_image = itemView.findViewById<View>(R.id.currency_image) as ImageView
+            currency_name = itemView.findViewById<View>(R.id.currency_name) as TextView
+            currency_value = itemView.findViewById<View>(R.id.currency_value) as TextView
             currency_container.setOnClickListener(this)
         }
 
         override fun onClick(view: View) {
-            for (currency in list) {
-                if (currency.full_name.equals(currency_name.text.toString(), ignoreCase = true)) {
-                    Log.d("MyApp", "Selected Currency Name : " + currency.full_name)
-                    // Saved selected currency
-                    val prefManager = PrefManager(activity)
-                    prefManager.saveSelectedCurrency(currency)
-                    activity.startActivity(Intent(activity, SelectedCurrencyActivity::class.java))
+            /* for (int i = 0; i < list.size(); i++) {
+                if (String.valueOf(list.get(i).getId()).equalsIgnoreCase(incident_id.getText().toString())) {
+                    Log.d("MyApp", "List id : " + list.get(i).getId() + "\nIncident Id : " + incident_id.getText());
+                    prefManagerIncident.saveIncident("clicked_incident", list.get(i));
+                    prefUtil.saveTappedMarker(list.get(i).getSectionId(), list.get(i).getLatitude(), list.get(i).getLongitude(), "incident");
                 }
             }
+            activity.startActivity(new Intent(activity, SelectedCurrencyActivity.class));*/
         }
     }
 }

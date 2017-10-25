@@ -1,4 +1,4 @@
-package com.coursion.currencyxchange_android.pref
+package com.coursion.currencyxchange_android_coursion.pref
 
 import android.app.Activity
 import android.content.Context
@@ -7,7 +7,7 @@ import android.preference.PreferenceManager
 import android.util.Log
 import android.view.View
 
-import com.coursion.currencyxchange_android.model.Currency
+import com.coursion.currencyxchange_android_coursion.model.Currency
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 

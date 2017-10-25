@@ -1,4 +1,4 @@
-package com.coursion.currencyxchange_android.controller
+package com.coursion.currencyxchange_android_coursion.controller
 
 import android.support.design.widget.TabLayout
 import android.support.v7.app.AppCompatActivity
@@ -13,17 +13,17 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.coursion.currencyxchange_android.R
-import com.coursion.currencyxchange_android.adapter.CurrencyAdapter
-import com.coursion.currencyxchange_android.adapter.GoldAdapter
-import com.coursion.currencyxchange_android.background.CurrencyTask
-import com.coursion.currencyxchange_android.background.GoldTask
-import com.coursion.currencyxchange_android.event.CurrencyEvent
-import com.coursion.currencyxchange_android.event.GoldEvent
-import com.coursion.currencyxchange_android.model.Currency
-import com.coursion.currencyxchange_android.model.Gold
-import com.coursion.currencyxchange_android.pref.PrefManager
-import com.coursion.currencyxchange_android.util.NetworkCheck
+import com.coursion.currencyxchange_android_coursion.R
+import com.coursion.currencyxchange_android_coursion.adapter.CurrencyAdapter
+import com.coursion.currencyxchange_android_coursion.adapter.GoldAdapter
+import com.coursion.currencyxchange_android_coursion.background.CurrencyTask
+import com.coursion.currencyxchange_android_coursion.background.GoldTask
+import com.coursion.currencyxchange_android_coursion.event.CurrencyEvent
+import com.coursion.currencyxchange_android_coursion.event.GoldEvent
+import com.coursion.currencyxchange_android_coursion.model.Currency
+import com.coursion.currencyxchange_android_coursion.model.Gold
+import com.coursion.currencyxchange_android_coursion.pref.PrefManager
+import com.coursion.currencyxchange_android_coursion.util.NetworkCheck
 import org.greenrobot.eventbus.EventBus
 import java.util.ArrayList
 import cn.pedant.SweetAlert.SweetAlertDialog

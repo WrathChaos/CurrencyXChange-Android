@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.coursion.currencyxchange_android.controller.MainActivity$PlaceholderFragment">
+    tools:context="com.coursion.currencyxchange_android_coursion.controller.MainActivity$PlaceholderFragment">
 
     <include android:id="@+id/loading_view_gold" layout="@layout/loading_view" />
 

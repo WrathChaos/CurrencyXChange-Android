@@ -1,7 +1,7 @@
-package com.coursion.currencyxchange_android.api
+package com.coursion.currencyxchange_android_coursion.api
 
-import com.coursion.currencyxchange_android.model.Currency
-import com.coursion.currencyxchange_android.model.Gold
+import com.coursion.currencyxchange_android_coursion.model.Currency
+import com.coursion.currencyxchange_android_coursion.model.Gold
 
 import retrofit2.Call
 import retrofit2.http.GET

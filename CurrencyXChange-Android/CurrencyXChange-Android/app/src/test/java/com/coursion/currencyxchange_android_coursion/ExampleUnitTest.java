@@ -1,4 +1,4 @@
-package com.coursion.currencyxchange_android;
+package com.coursion.currencyxchange_android_coursion;
 
 import org.junit.Test;
 
